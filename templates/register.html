@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Chat TEA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1c1c2b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #eee;
+    }
+
+    .register-container {
+      background-color: #2a2a3d;
+      border-radius: 12px;
+      padding: 32px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .register-container h1 {
+      margin-bottom: 24px;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #44455c;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .register-container button {
+      background-color: #5d4ecb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .register-container button:hover {
+      background-color: #7b6df2;
+    }
+
+    .register-container .link {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    .register-container .link a {
+      color: #bbb0ff;
+      text-decoration: none;
+    }
+
+    .error-message {
+      color: #ff8080;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .register-container {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h1>Criar Conta</h1>
+
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/register">
+      <input type="text" name="username" placeholder="Nome de usuário" required />
+      <input type="password" name="password" placeholder="Senha" required />
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <div class="link">
+      Já tem uma conta?
+      <a href="/login">Fazer login</a>
+    </div>
+  </div>
+</body>
+</html>

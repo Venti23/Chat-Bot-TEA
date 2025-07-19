@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat TEA</title>
+  <link rel="icon" href="/static/imagens/logo.png" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="tema-claro">
+
+  <div class="chat-wrapper">
+
+    <div class="sidebar-container">
+      <button id="toggle-historico">Histórico</button>
+      <div class="sidebar" id="historico-sidebar" style="display: none;">
+        <button onclick="novaConversa()">Nova Conversa</button>
+        <ul id="lista-historico"></ul>
+      </div>
+    </div>
+    <header>
+      <h1>Chat TEA</h1>
+      <div class="header-buttons">
+        <button class="btn" onclick="abrirModal('modal-dicas')">Dicas de Estudo</button>
+        <button class="btn" onclick="abrirModal('modal-tempo')">Dividir o Tempo</button>
+        <button id="tema-btn" onclick="alternarTema()">Tema</button>
+        <form action="/logout" method="POST" style="display: inline;">
+          <button type="submit" class="logout-btn">Sair</button>
+        </form>
+      </div>
+    </header>
+
+    <main id="chat-box"></main>
+
+    <footer class="input-area">
+      <input type="text" id="user-input" placeholder="Digite sua dúvida..." />
+      <button onclick="enviarMensagem()">Enviar</button>
+    </footer>
+
+    <div class="file-upload-wrapper">
+      <input type="file" id="file-input" name="file" accept=".txt,.pdf,.docx,.xlsx" hidden />
+      <label for="file-input" class="file-upload-label">Arquivo</label>
+      <span id="file-name">Nenhum arquivo escolhido</span>
+    </div>
+
+  </div>
+  <div id="modal-dicas" class="modal">
+  <div class="modal-conteudo">
+    <span class="fechar" onclick="fecharModal('modal-dicas')">&times;</span>
+    <h2>Dicas de Estudo</h2>
+    <ul>
+      <li>Estude em blocos de 25 minutos (Pomodoro).</li>
+      <li>Explique para você mesmo o que aprendeu.</li>
+      <li>Use mapas mentais, diagramas e resumos simples.</li>
+    </ul>
+  </div>
+</div>
+<div id="modal-tempo" class="modal">
+  <div class="modal-conteudo">
+    <span class="fechar" onclick="fecharModal('modal-tempo')">&times;</span>
+    <h2>Dividir o Tempo</h2>
+    <p>Divida seu tempo assim:</p>
+    <ul>
+      <li><strong>Estudo:</strong> 60%</li>
+      <li><strong>Revisão:</strong> 20%</li>
+      <li><strong>Descanso:</strong> 20%</li>
+    </ul>
+    <p>Dica: Use um cronômetro ou app para organizar seu dia.</p>
+  </div>
+</div>
+  <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+</body>
+</html>

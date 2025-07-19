@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar - Chat TEA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1c1c2b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #eee;
+    }
+
+    .login-container {
+      background-color: #2a2a3d;
+      border-radius: 12px;
+      padding: 32px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .login-container h1 {
+      margin-bottom: 24px;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #44455c;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .login-container button {
+      background-color: #6b5efc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background-color: #837efc;
+    }
+
+    .login-container .link {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .login-container .link a {
+      color: #bbb0ff;
+      text-decoration: none;
+    }
+
+    .error-message {
+      color: #ff8080;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Entrar</h1>
+
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/login">
+      <input type="text" name="username" placeholder="Usuário" required />
+      <input type="password" name="password" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="link">
+      Não tem conta? <a href="/register">Cadastre-se</a>
+    </div>
+  </div>
+</body>
+</html>

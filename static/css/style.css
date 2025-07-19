@@ -1,0 +1,441 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Temas */
+.tema-claro {
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+.tema-escuro {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+/* Layout Principal */
+.chat-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 20px 270px; /* Espaço para o sidebar */
+    transition: padding-left 0.3s;
+}
+
+/* Sidebar de Histórico */
+.sidebar-container {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    width: 250px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+#toggle-historico {
+    background-color: #5c67f2;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+#toggle-historico:hover {
+    background-color: #4a53c6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#toggle-historico::after {
+    content: "☰";
+    font-size: 1.3em;
+}
+
+#historico-sidebar {
+    display: none;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    padding: 15px;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Lista de Histórico */
+#lista-historico {
+    list-style: none;
+}
+
+#lista-historico li {
+    padding: 12px;
+    margin: 8px 0;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+#lista-historico li:hover {
+    background-color: #e8e8e8;
+}
+
+/* Botão Nova Conversa */
+#historico-sidebar > button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #5c67f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#historico-sidebar > button:hover {
+    background-color: #4a53c6;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: black;
+}
+
+.tema-escuro h1 {
+    color: white;
+}
+
+/* Área do Chat */
+#chat-box {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.tema-escuro #chat-box {
+    background-color: rgba(30, 30, 30, 0.9);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Mensagens */
+.mensagem {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+    line-height: 1.5;
+    clear: both;
+    position: relative;
+}
+
+.usuario {
+    background-color: #5d75fa;
+    color: white;
+    float: right;
+    border-top-right-radius: 0;
+}
+
+.bot {
+    background-color: #e9e9e9;
+    color: #333;
+    float: left;
+    border-top-left-radius: 0;
+}
+
+.tema-escuro .bot {
+    background-color: #2f2f3f;
+    color: #f0f0f0;
+}
+
+/* Área de Input */
+.input-area {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #5d75fa;
+    box-shadow: 0 0 0 2px rgba(93, 117, 250, 0.2);
+}
+
+/* Botões */
+button:not(#toggle-historico) {
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: #5c67f2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover:not(#toggle-historico) {
+    background-color: #4a53c6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Botões de Ajuda */
+.btn {
+    background-color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn:hover {
+    background-color: #5a6268;
+}
+
+/* Upload de Arquivo */
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.file-upload-label {
+    background-color: #5d4ecb;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.file-upload-label:hover {
+    background-color: #7b6df2;
+}
+
+#file-name {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.tema-escuro #file-name {
+    color: #aaa;
+}
+
+/* Modais */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.3s;
+}
+
+.modal-conteudo {
+    background-color: #f8f9fa;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.modal-conteudo h2 {
+    color: #343a40;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fechar {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.fechar:hover {
+    color: #333;
+}
+
+/* Tema Escuro */
+.tema-escuro .modal-conteudo {
+    background-color: #2f2f3f;
+    color: #e0e0e0;
+}
+
+.tema-escuro .modal-conteudo h2 {
+    color: #f0f0f0;
+}
+
+.tema-escuro .fechar:hover {
+    color: #f0f0f0;
+}
+
+.tema-escuro #historico-sidebar {
+    background-color: #2a2a3a;
+    border: 1px solid #444;
+}
+
+.tema-escuro #lista-historico li {
+    background-color: #3a3a4a;
+    color: #e0e0e0;
+}
+
+.tema-escuro #lista-historico li:hover {
+    background-color: #4a4a5a;
+}
+
+.tema-escuro #historico-sidebar > button {
+    background-color: #5d4ecb;
+}
+
+.tema-escuro #historico-sidebar > button:hover {
+    background-color: #7b6df2;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsividade */
+@media screen and (max-width: 1000px) {
+    .chat-wrapper {
+        padding-left: 220px;
+    }
+    
+    .sidebar-container {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .chat-wrapper {
+        padding: 80px 15px 15px 15px;
+    }
+    
+    .sidebar-container {
+        width: calc(100% - 30px);
+        left: 15px;
+        top: 15px;
+    }
+    
+    #historico-sidebar {
+        position: fixed;
+        top: 70px;
+        left: 15px;
+        right: 15px;
+        max-height: calc(100vh - 85px);
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .input-area {
+        flex-direction: column;
+    }
+    
+    button, .btn, input[type="text"] {
+        width: 100%;
+    }
+    
+    .modal-conteudo {
+        padding: 20px 15px;
+    }
+}
+/* Corrige listas numeradas dentro das mensagens da IA */
+.bot ol,
+.bot ul {
+    padding-left: 1.5rem;
+    list-style-position: inside;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bot li {
+    margin-bottom: 6px;
+    word-wrap: break-word;
+}
