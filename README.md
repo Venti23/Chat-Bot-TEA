@@ -43,6 +43,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # 7. Alterar o .env
+Altere o .env com a sua secret key e sua api key
+Para obter sua api key acesse: https://api.together.ai/
 
 # 6. Execute o chatbot
 python Serv.py
