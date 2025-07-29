@@ -78,9 +78,7 @@ def load_user(user_id):
 # Cliente da IA
 client = Together(api_key=os.getenv("TOGETHER_API_KEY"))
 
-# Lê o conteúdo do prompt do arquivo externo
-with open("prompt.txt", "r", encoding="utf-8") as file:
-    PROMPT_TEA = file.read()
+
 
 
 @app.route("/")
